@@ -3,6 +3,15 @@ const { typeDefs } = require('./schema/type_defs');
 const { resolvers } = require('./schema/resolvers');
 
 
+/*
+array methods in js:
+    arr.find((data)=> )
+    arr.filter
+    arr.findIndex
+    arr.some
+    arr.splice
+*/
+
 
 
 
