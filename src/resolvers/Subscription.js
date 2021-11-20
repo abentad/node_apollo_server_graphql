@@ -1,7 +1,11 @@
-
-
 const Subscription = {
-    
+    count: {
+        subscribe(parent, args, { pubsub }, info){
+            let count = 0;
+
+            return pubsub.asyncIterator('count');
+        }
+    }
 };
 
 module.exports = Subscription;
