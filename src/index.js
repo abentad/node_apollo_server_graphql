@@ -6,6 +6,7 @@ const Mutation = require('./resolvers/Mutation');
 const User = require('./resolvers/User');
 const Post = require('./resolvers/Post');
 const Comment = require('./resolvers/Comment');
+const Subscription = require('./resolvers/Subscription');
 
 
 
@@ -16,7 +17,8 @@ const server = new ApolloServer({
         Mutation,
         User,
         Post,
-        Comment
+        Comment,
+        Subscription
     },
     context: { db }
 });
