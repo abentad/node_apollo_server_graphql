@@ -33,11 +33,12 @@ const Mutation = {
         if(typeof(data.age) !== 'undefined') user.age = data.age;
         return user; 
     },
-    createPost(parent, args, { db }, info){
+    createPost(parent, args, { db, pubsub}, info){
         const userExists = db.users.some((user)=> user.id === args.data.authorId);
         if(!userExists) throw new Error('User doesn\'t exist.');
         const newPost = { id: uuidv4(), ...args.data};
         db.posts.push(newPost);
+        if(newPost.published) pubsub.publish('post', { post: newPost });
         return newPost;
     },
     deletePost(parent, args, { db }, info){
@@ -56,12 +57,13 @@ const Mutation = {
         if(typeof(data.published) === 'boolean') post.published = data.published;
         return post;
     },
-    createComment(parent, args, { db }, info){
+    createComment(parent, args, { db, pubsub }, info){
         const userExists = db.users.some((user)=> user.id === args.data.authorId);
         const postExists = db.posts.some((post)=> post.id === args.data.postId && post.published);
         if(!userExists || !postExists) throw new Error('User or Post not found or published.');
         const newComment = {id: uuidv4(), ...args.data};
         db.comments.push(newComment);
+        pubsub.publish(`comment_${args.data.postId}`, { comment: newComment });
         return newComment;
     },
     deleteComment(parent, args, { db }, info){
