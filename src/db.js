@@ -11,7 +11,7 @@ const users = [
 const posts = [
     { id: "1", authorId: "2", title: "Favorite video game", body: "GTA", published: false },
     { id: "2", authorId: "3", title: "color", body: "green", published: true },
-    { id: "3", authorId: "2", title: "fruit", body: "orange", published: false }
+    { id: "3", authorId: "2", title: "fruit", body: "orange", published: true }
 ];
 
 const comments = [
